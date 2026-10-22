@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/icon.svg" alt="" width="96">
+</p>
+
 <h1 align="center">Better Clipboard</h1>
 
 <p align="center">
