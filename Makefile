@@ -1,8 +1,10 @@
 UUID = better-clipboard@tunjayoff
 INSTALL_DIR = $(HOME)/.local/share/gnome-shell/extensions/$(UUID)
 SOURCES = extension.js prefs.js stylesheet.css metadata.json lib icons schemas
+DEV_DIR = $(HOME)/.cache/better-clipboard-dev
+STAMP := $(shell date +%s)
 
-.PHONY: all schemas zip install uninstall lint clean
+.PHONY: all schemas zip install dev-reload uninstall lint clean
 
 all: zip
 
@@ -26,6 +28,20 @@ install: zip
 	unzip -q dist/$(UUID).shell-extension.zip -d $(INSTALL_DIR)
 	glib-compile-schemas --strict $(INSTALL_DIR)/schemas
 	@echo "Installed. Log out and back in once, then: gnome-extensions enable $(UUID)"
+
+# Loads the current code into the running shell without logging out. The shell
+# caches extension code by path, so every reload gets a fresh folder; the two
+# newest are kept since the running copy still reads icons from its folder.
+dev-reload: install
+	mkdir -p $(DEV_DIR)/$(STAMP)/$(UUID)
+	unzip -q dist/$(UUID).shell-extension.zip -d $(DEV_DIR)/$(STAMP)/$(UUID)
+	glib-compile-schemas --strict $(DEV_DIR)/$(STAMP)/$(UUID)/schemas
+	@ls -1dt $(DEV_DIR)/*/ | tail -n +3 | xargs -r rm -rf --
+	@echo
+	@echo "Press Alt+F2, type lg, press Enter, and run:"
+	@echo
+	@echo "const em = Main.extensionManager; const old = em.lookup('$(UUID)'); if (old) await em.unloadExtension(old); await em.loadExtension(em.createExtensionObject('$(UUID)', Gio.File.new_for_path('$(DEV_DIR)/$(STAMP)/$(UUID)'), 2))"
+	@echo
 
 uninstall:
 	rm -rf $(INSTALL_DIR)
