@@ -51,11 +51,14 @@ export default class BetterClipboardExtension extends Extension {
         this._settings.disconnectObject(this);
         this._popup?.destroy();
         this._popup = null;
-        for (const id of [this._pasteId, this._privateTickId]) {
-            if (id)
-                GLib.source_remove(id);
+        if (this._pasteId) {
+            GLib.source_remove(this._pasteId);
+            this._pasteId = 0;
         }
-        this._pasteId = this._privateTickId = 0;
+        if (this._privateTickId) {
+            GLib.source_remove(this._privateTickId);
+            this._privateTickId = 0;
+        }
 
         this._shortcuts.destroy();
         this._shortcuts = null;
@@ -90,14 +93,14 @@ export default class BetterClipboardExtension extends Extension {
                 isPrivate: () => this._monitor.isPrivate(),
                 startPrivate: seconds => this._startPrivate(seconds),
                 openPreferences: () => this.openPreferences(),
+                closed: () => {
+                    if (this._popup === popup)
+                        this._popup = null;
+                    this._indicator?.setOpen(false);
+                },
             },
         });
         popup.mode = mode;
-        popup.connect('closed', () => {
-            if (this._popup === popup)
-                this._popup = null;
-            this._indicator?.setOpen(false);
-        });
 
         this._popup = popup;
         if (popup.open())
@@ -106,16 +109,16 @@ export default class BetterClipboardExtension extends Extension {
             this._popup = null;
     }
 
-    _copy(item, opts = {}) {
-        if (!this._monitor.setItem(item, opts))
+    async _copy(item, opts = {}) {
+        if (!await this._monitor.setItem(item, opts))
             return false;
         if (this._settings.get_boolean('move-to-top-on-paste'))
             this._history.touch(item.id);
         return true;
     }
 
-    _paste(item, opts) {
-        if (!this._copy(item, opts))
+    async _paste(item, opts) {
+        if (!await this._copy(item, opts) || !this._monitor)
             return;
         if (this._pasteId)
             GLib.source_remove(this._pasteId);

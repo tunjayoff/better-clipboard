@@ -1,7 +1,7 @@
 {
   "uuid": "better-clipboard@tunjayoff",
   "name": "Better Clipboard",
-  "description": "A fast, keyboard-first clipboard history. Open it from the top bar or right at your mouse pointer, search everything you copied, preview text, code, links, files and images, pin what matters and keep passwords out of history.",
+  "description": "A fast, keyboard-first clipboard history. Open it from the top bar or right at your mouse pointer, search everything you copied, preview text, code, links, files and images, pin what matters and keep passwords out of history.\n\nClipboard access: this extension reads the clipboard every time it changes and stores the history in ~/.local/share/better-clipboard@tunjayoff on your computer. It writes to the clipboard only when you pick an item. Nothing leaves your computer, except one request per copied link to fetch its page title, which you can turn off in the settings.",
   "shell-version": ["51"],
   "settings-schema": "org.gnome.shell.extensions.better-clipboard",
   "url": "https://github.com/tunjayoff/better-clipboard",
