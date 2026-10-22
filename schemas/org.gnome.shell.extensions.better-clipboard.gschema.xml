@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.better-clipboard" path="/org/gnome/shell/extensions/better-clipboard/">
+
+    <!-- Shortcuts -->
+    <key name="shortcut-cursor" type="as">
+      <default><![CDATA[['<Super>v']]]></default>
+      <summary>Open the compact panel at the mouse pointer</summary>
+    </key>
+    <key name="shortcut-toggle" type="as">
+      <default>[]</default>
+      <summary>Open the panel under the top bar icon (off by default; clicking the icon does this)</summary>
+    </key>
+
+    <!-- History -->
+    <key name="history-size" type="i">
+      <range min="10" max="2000"/>
+      <default>200</default>
+      <summary>How many unpinned items to keep</summary>
+    </key>
+    <key name="move-to-top-on-paste" type="b">
+      <default>true</default>
+      <summary>Move an item to the top of the history after pasting it</summary>
+    </key>
+    <key name="max-image-size-mb" type="i">
+      <range min="1" max="100"/>
+      <default>20</default>
+      <summary>Images larger than this are not saved</summary>
+    </key>
+
+    <!-- Privacy -->
+    <key name="ignore-password-managers" type="b">
+      <default>true</default>
+      <summary>Never record content marked as secret or copied from an ignored app</summary>
+    </key>
+    <key name="ignored-apps" type="as">
+      <default><![CDATA[['bitwarden', 'keepassxc', '1password']]]></default>
+      <summary>Apps whose copies are treated as sensitive (matched against window class, app id and name)</summary>
+    </key>
+    <key name="sensitive-timeout" type="i">
+      <range min="5" max="3600"/>
+      <default>30</default>
+      <summary>Seconds before a sensitive item is removed from history</summary>
+    </key>
+    <key name="clear-on-logout" type="b">
+      <default>false</default>
+      <summary>Clear unpinned history when a new session starts</summary>
+    </key>
+    <key name="private-mode" type="b">
+      <default>false</default>
+      <summary>Pause recording</summary>
+    </key>
+    <key name="private-until" type="x">
+      <default>0</default>
+      <summary>Unix time (seconds) when private mode ends, 0 for never</summary>
+    </key>
+
+    <!-- Appearance -->
+    <key name="show-preview" type="b">
+      <default>true</default>
+      <summary>Show the preview pane in the top bar panel</summary>
+    </key>
+    <key name="fetch-link-titles" type="b">
+      <default>true</default>
+      <summary>Fetch the page title of copied links</summary>
+    </key>
+
+    <!-- Internal -->
+    <key name="clear-history-request" type="i">
+      <default>0</default>
+      <summary>Bumped by the preferences window to ask the shell to clear history</summary>
+    </key>
+    <key name="message-tray-accels-backup" type="as">
+      <default>[]</default>
+      <summary>Shortcuts removed from GNOME's notification list toggle to avoid a conflict, restored on disable</summary>
+    </key>
+  </schema>
+</schemalist>

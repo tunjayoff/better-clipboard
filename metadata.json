@@ -1,0 +1,9 @@
+{
+  "uuid": "better-clipboard@tunjayoff",
+  "name": "Better Clipboard",
+  "description": "A fast, keyboard-first clipboard history. Open it from the top bar or right at your mouse pointer, search everything you copied, preview text, code, links, files and images, pin what matters and keep passwords out of history.",
+  "shell-version": ["51"],
+  "settings-schema": "org.gnome.shell.extensions.better-clipboard",
+  "url": "https://github.com/tunjayoff/better-clipboard",
+  "version": 1
+}
