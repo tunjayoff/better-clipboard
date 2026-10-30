@@ -112,6 +112,21 @@
 
 .bc-icon-button-icon { icon-size: 18px; }
 
+.bc-header-button {
+  height: 32px;
+  padding: 0 12px 0 10px;
+  border-radius: 8px;
+  border: 1px solid #262833;
+  color: #ecedf1;
+}
+
+.bc-header-button:hover { background-color: #1c1e26; border-color: rgba(240, 128, 110, 0.4); color: #f0806e; }
+.bc-header-button:focus { border-color: #f2b33d; }
+.bc-header-button:insensitive { color: #4a4d5c; border-color: #1e2029; }
+.bc-header-button-box { spacing: 7px; }
+.bc-header-button-icon { icon-size: 15px; }
+.bc-header-button-label { font-size: 12.5px; font-weight: 500; }
+
 /* Private-mode banner */
 
 .bc-banner {
@@ -123,6 +138,11 @@
 }
 
 .bc-banner-icon { icon-size: 16px; color: #f2b33d; }
+.bc-banner.danger {
+  background-color: rgba(240, 128, 110, 0.10);
+  border-color: rgba(240, 128, 110, 0.36);
+}
+.bc-banner.danger .bc-banner-icon { color: #f0806e; }
 .bc-banner-label { color: #ecedf1; font-size: 13px; }
 
 /* Filter chips */
@@ -159,7 +179,9 @@
 }
 
 .bc-list { padding: 8px; spacing: 2px; }
+.bc-list.scrolling { padding-right: 18px; }
 .compact .bc-list { padding: 6px; }
+.compact .bc-list.scrolling { padding-right: 16px; }
 
 .bc-section {
   padding: 10px 10px 4px;
@@ -203,6 +225,16 @@
 .bc-row-title.mono { font-family: monospace; font-size: 12.5px; }
 .bc-row-meta { font-size: 11.5px; color: #868a9b; }
 .bc-row-pin { icon-size: 14px; color: #f2b33d; }
+
+.bc-row-delete {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  color: #868a9b;
+}
+
+.bc-row-delete:hover { background-color: rgba(240, 128, 110, 0.14); color: #f0806e; }
+.bc-row-delete-icon { icon-size: 15px; }
 
 .bc-kbd {
   min-width: 8px;
@@ -378,6 +410,14 @@
 .bc-button.primary:focus { border-color: #ecedf1; }
 
 .bc-button.danger:hover { color: #f0806e; border-color: rgba(240, 128, 110, 0.4); }
+.bc-button.danger-fill {
+  background-color: #f0806e;
+  border-color: #f0806e;
+  color: #1f0b08;
+  font-weight: 600;
+}
+.bc-button.danger-fill:hover { background-color: #f49a8b; border-color: #f49a8b; color: #1f0b08; }
+.bc-button.danger-fill:focus { border-color: #ecedf1; }
 .bc-button.icon-only { width: 34px; padding: 0; }
 
 .bc-button-box { spacing: 8px; }

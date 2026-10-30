@@ -111,6 +111,7 @@ it, or every copy will be recorded twice.
 | <kbd>Ctrl</kbd>+<kbd>C</kbd> | Copy without pasting |
 | <kbd>Ctrl</kbd>+<kbd>P</kbd> | Pin or unpin |
 | <kbd>Del</kbd> | Delete (<kbd>Shift</kbd>+<kbd>Del</kbd> while searching) |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Del</kbd> | Clear the history (pinned items are kept), <kbd>Enter</kbd> to confirm |
 | <kbd>Tab</kbd> · <kbd>Shift</kbd>+<kbd>Tab</kbd> | Next or previous filter |
 | <kbd>Esc</kbd> | Clear the search, then close |
 
