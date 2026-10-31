@@ -140,7 +140,8 @@ in Settings.
 
 ```sh
 make lint     # syntax check, schema check, unit tests
-make zip      # dist/better-clipboard@tunjayoff.shell-extension.zip for extensions.gnome.org
+make zip      # dist/better-clipboard@tunjayoff.shell-extension.zip for extensions.gnome.org,
+              # checked with shexli (needs uv; set up in ~/.cache on first run)
 make install  # install into ~/.local/share/gnome-shell/extensions
 ```
 

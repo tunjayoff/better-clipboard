@@ -3,8 +3,11 @@ INSTALL_DIR = $(HOME)/.local/share/gnome-shell/extensions/$(UUID)
 SOURCES = extension.js prefs.js stylesheet.css metadata.json lib icons schemas
 DEV_DIR = $(HOME)/.cache/better-clipboard-dev
 STAMP := $(shell date +%s)
+SHEXLI_VENV = $(HOME)/.cache/better-clipboard-shexli
+# Pinned: shexli 0.2.1 crashes with tree-sitter 0.26.
+SHEXLI_DEPS = shexli==0.2.1 tree-sitter==0.25.2 tree-sitter-javascript==0.25.0
 
-.PHONY: all schemas zip install dev-reload uninstall lint clean
+.PHONY: all schemas zip shexli install dev-reload uninstall lint clean
 
 all: zip
 
@@ -12,12 +15,21 @@ schemas:
 	glib-compile-schemas --strict schemas/
 
 # The zip is what gets uploaded to extensions.gnome.org or installed with
-# `gnome-extensions install`.
+# `gnome-extensions install`. Every build is checked with shexli, the checker
+# extensions.gnome.org runs on uploads.
 zip:
 	@mkdir -p dist
 	gnome-extensions pack --force \
 		--extra-source=lib --extra-source=icons \
 		--out-dir=dist .
+	@$(MAKE) --no-print-directory shexli
+
+shexli: $(SHEXLI_VENV)/bin/shexli
+	@$(SHEXLI_VENV)/bin/python -I tools/shexli.py dist/$(UUID).shell-extension.zip
+
+$(SHEXLI_VENV)/bin/shexli:
+	uv venv -q --python 3.12 $(SHEXLI_VENV)
+	uv pip install -q --python $(SHEXLI_VENV)/bin/python $(SHEXLI_DEPS)
 
 # `gnome-extensions install` fails on zips with subfolders ("Can't recursively
 # copy directory"), so unpack it ourselves and compile the schema like the
